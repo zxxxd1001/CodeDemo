@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="myScopeApp">
+<head>
+    <meta charset="UTF-8">
+    <title>scope作用域</title>
+</head>
+<body >
+<div ng-controller="scopeController">
+    <h1>angularJS启动并生成视图时,会将根ng-app元素同$rootScope进行绑定。</h1>
+Hello,<span ng-bind="name"></span>
+<ul ng-repeat="person in persons">
+    <li ng-bind="person.name"></li>
+    <li ng-bind="person.age"></li>
+</ul>
+</div>
+<div ng-controller="firstController">
+
+</div>
+<div ng-controller="threeController">
+
+</div>
+<script src="../javaScript/libs/angular.js"></script>
+<script src="../javaScript/basis/scope-rootsocpe.js"></script>
+</body>
+</html>

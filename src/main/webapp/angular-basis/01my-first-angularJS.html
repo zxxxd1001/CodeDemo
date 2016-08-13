@@ -19,7 +19,7 @@
      *   在javaScrpit中，将函数全部定义在全局命名空间绝对不是什么好主意，
      * 这样做会导致冲突从而使调试变得非常困难，浪费宝贵的开发时间。
      */
-    // 全局命名空间 中也可以定义 控制器函数
+    // 全局命名空间 中也可以定义 控制器函数  隐示控制器
     var MyController = function ($scope, $timeout) {
         $scope.clock = new Date();
         var updateClock = function () {

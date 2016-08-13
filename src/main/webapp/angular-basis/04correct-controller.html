@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app="correctApp">
+<head>
+    <meta charset="UTF-8">
+    <title>轻量的Controller</title>
+</head>
+<body ng-controller="correctController">
+<input type="radio" value="1" ng-model="id"/>1
+<input type="radio" value="2" ng-model="id"/>2
+<input type="radio" value="3" ng-model="id"/>3
+<button ng-click="getUser(id)">获取</button>
+<h1 ng-bind="user.user"></h1>
+<script src="../javaScript/libs/angular.js"></script>
+<script src="../javaScript/basis/correct-controller.js"></script>
+</body>
+</html>
