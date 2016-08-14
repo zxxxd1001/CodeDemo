@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myCustomApp">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义filter</title>
+</head>
+<body>
+<ul>
+    <li ng-repeat="date in date|filterAge">
+        {{date.name}}{{date.age}}{{date.city}}
+    </li>
+</ul>
+<hr>
+<ul>
+    <li ng-repeat="date in date|filtercity">
+        {{date.name}}{{date.age}}{{date.city}}
+    </li>
+</ul>
+<script type="text/javascript" src="../javaScript/libs/angular.js"></script>
+<script type="text/javascript" src="../javaScript/basis/custom-filter.js"></script>
+</body>
+</html>

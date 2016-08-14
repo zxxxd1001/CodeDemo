@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myFilterApp">
+<head>
+    <meta charset="UTF-8">
+    <title>filter过滤器</title>
+</head>
+<body >
+<div ng-controller="myFilterController">
+    <p>{{123456789 | number}}</p>
+    <p>{{12345.6789 | number:3}}</p><hr>
+    <p>{{123456 | currency:'RMB'}}</p><hr>
+    <p>date:{{date | date}}</p>
+    <p>{{date | date:"yyyy-MM-dd HH:mm:ss"}}</p><hr>
+    <p>小写：{{message|lowercase}}</p>
+    <p>大写：{{message|uppercase}}</p><hr>
+    <p>截取：{{[1,2,3,5,6,4,6,7,9]|limitTo:5}}</p><hr>
+    <p>orderBy:{{care|orderBy:"py"}}</p><hr><!--todo 改成循环显示-->
+    <p>name查找：{{care|filter:"太原"}}</p><!--todo 改成input输入框形式-->
+    <p>py查找：{{care|filter:"b"}}</p><!--todo 改成input输入框形式-->
+    <p>对象查找：{{care|filter:{name:"山西"} }}</p><!--todo 改成input输入框形式-->
+    <p>{{care|filter:clickname}}</p>
+</div>
+<script type="text/javascript" src="../javaScript/libs/angular.js"></script>
+<script type="text/javascript" src="../javaScript/basis/filter.js"></script>
+</body>
+</html>
