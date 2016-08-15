@@ -1,16 +1,8 @@
 angular.module("myCustomApp",[], function ($provide, $filterProvider,$controllerProvider){
     $provide.service("date", function () {
         return [
-            {
-                name: "张露",
-                age: "20",
-                city: "榆次"
-            },
-            {
-                name: "王鹏",
-                age: "30",
-                city: "北京"
-            }
+            {name: "张露", age: "20", city: "榆次"},
+            {name: "王鹏", age: "30", city: "北京"}
         ];
     });
     $filterProvider.register("filterAge",function(){
@@ -24,7 +16,7 @@ angular.module("myCustomApp",[], function ($provide, $filterProvider,$controller
             return newObj;
         }
     });
-    $controllerProvider.register("filtercontroller",function($scope,date){
+    $controllerProvider.register("myCustomController",function($scope,date){
         $scope.date=date;
     })
 }).filter("filtercity",function(){

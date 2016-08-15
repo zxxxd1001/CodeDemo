@@ -15,12 +15,6 @@ angular.module('myFilterApp', []).factory('date', function () {
     $scope.care = date.care;
     var a = $filter("number")(date.num);
     console.log(a);
-    console.log("----------------");
     var json=$filter("json")(date.care);
     console.log(json);
-    console.log(date.care);
-    //自定义
-    $scope.clickname=function (obj){
-        console.log(obj);
-    }
 });
