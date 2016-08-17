@@ -5,7 +5,7 @@
     <title>scope作用域</title>
 </head>
 <body >
-<div ng-controller="scopeController">
+<div ng-controller="scopeController" id="scopeControllerID">
     <h1>angularJS启动并生成视图时,会将根ng-app元素同$rootScope进行绑定。</h1>
 Hello,<span ng-bind="name"></span>
 <ul ng-repeat="person in persons">
@@ -20,6 +20,7 @@ Hello,<span ng-bind="name"></span>
 
 </div>
 <script src="../javaScript/libs/angular.js"></script>
+<script src="../javaScript/libs/jquery.js"></script>
 <script src="../javaScript/basis/scope-rootsocpe.js"></script>
 </body>
 </html>

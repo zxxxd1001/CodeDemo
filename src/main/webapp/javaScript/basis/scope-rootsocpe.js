@@ -43,6 +43,13 @@ angular.module("myScopeApp").controller("firstController",["$scope",function($sc
 
     //$scope可以调用上一个
     console.log("prevSibling$scope",$scope.$$prevSibling);
+
+    //通过ID调用页面scope 不用JQuery
+    var scope= angular.element(scopeControllerID).scope();
+    console.log(scope.persons[0]);
+    //引用JQuery
+    var scope= angular.element($("#scopeControllerID")).scope();
+    console.log(scope.persons[1]);
 }]);
 angular.module("myScopeApp").controller("threeController",["$scope",function($scope){
     console.log("threeController$scope",$scope);
