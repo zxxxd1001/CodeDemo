@@ -13,7 +13,7 @@ angular.module("firstDirectiveApp",[],["$compileProvider", function (compileProv
 angular.module("firstDirectiveApp").directive("ccTom", function () {
     return {
         restrict: "E",
-        templateUrl: "first-directive-Url.html",
+        templateUrl: "01first-directive-Url.html",
         replace: true
     }
 }).directive("ccTomm", function () {
