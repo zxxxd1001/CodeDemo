@@ -5,7 +5,7 @@ angular.module("exampleApp").directive("costomTags",function(){
         restrict: "ECAM",
         template: "<div>{{user.name}}</div>",
         replace: true,
-        //compile做的是将当前页面的结构显示出来
+        //compile做的是将当前页面的结构显示出来 
         compile: function (tElement, tAttrs, transclude) {
             //compile中返回的就是link函数  定义compile就不要定义link 应为返回的值就是link
             //必须有返回值 返回的是link 主要处理当前的compile 连接我们scope绑定及事件绑定
