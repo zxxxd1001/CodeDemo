@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var obj={x:1,y:2};
+        console.log("x:"+obj.x);
+        console.log("y:"+obj["y"]);
+        obj["x"]=3;
+        obj.y=4;
+        console.log(obj);
+
+        var obj1={x1:1,x2:2,x3:3};
+        var i=1,n=3;
+        for(;i<=n;i++){
+            console.log(obj1['x'+i]);
+        }
+        var p;
+        for(p in obj1){
+            console.log(p+":"+obj1[p]);
+        }
+
+        var person={age:28,title:"Fe"};
+        console.log(delete person.age,person);
+        console.log(delete person["title"],person);
+        console.log(person.age,delete person.age);
+        console.log(delete Object.prototype,Object.prototype);
+        var descriptor=Object.getOwnPropertyDescriptor(Object,'prototype');
+        //是否可配置,决定了delete Object.prototype返回false并且不会被生效
+        console.log(descriptor.configurable,descriptor);
+
+        //如果用var定义的全局变量或者是局部变量任然不能被删除，因为不是对象的属性了
+        var globalVal=1;
+        console.log(delete globalVal,globalVal);//false
+        function test(){
+            var localVal=1;
+            function testd(){}
+            console.log(delete localVal,localVal);//false
+            console.log(delete testd,testd);//false
+        }
+        console.log(delete test,test);//false
+
+        var cat=new Object;
+        cat.legs=4;
+        cat.name="zhangsan";
+        console.log('legs' in cat,cat);//true cat上有此属性
+        console.log('abc' in cat,cat);//false cat上没有此属性
+        console.log('toString' in cat,cat);//true  cat上没有此属性 但是原型链Object上有 inherited prototype！！！
+        console.log(cat.hasOwnProperty("legs"));//cat上有此属性
+        console.log(cat.hasOwnProperty("toString"));//cat上没有此属性
+        console.log(cat.propertyIsEnumerable('legs'));//是否可枚举 true
+        console.log(cat.propertyIsEnumerable("toString"));//是否可枚举 false
+
+        //如何让自定义属性的枚举对象是false
+        Object.defineProperty(cat,'price',{enumerable:false,value:1000});
+        //我们用对象自变量或者用new Object 创建的对象 又或者是通过赋值去创建的属性
+        // 默认既可以枚举也可以写也可以delete掉 标签都是为true的
+        //而我们用Object.defineProperty这样创建的对象如果不特殊写的话，默认值都是false
+        console.log(cat.propertyIsEnumerable('price'));
+        console.log(cat.hasOwnProperty("price"),cat.propertyIsEnumerable('price'),cat);
+        //首先确定有cat这个对象么，为true就在判断cat中是否有price这个属性，
+        function testIf(flag){
+            if(flag){
+                cat.abc="asd";
+            }
+            if (cat && cat.price) {
+                console.log(cat.price);
+            }
+            if (cat && cat.abc) {
+                console.log(cat.abc);
+            }
+        }
+
+        //由于Object.prototype上面的方法，比如：toString，propertyIsEnumerable。。。
+        //这些方法它们都是不可枚举的所以在for in 是不会打印出来
+        var o={x:1,y:2,z:3};
+        console.log('toString' in o);//true
+        console.log(o.propertyIsEnumerable("toString"));//false
+        var key;
+        for(key in o){
+            console.log(key);
+        }
+
+
+        var object=Object.create(o);
+        object.d=9;
+        //原型链上的所有属性都会被打印出来
+        for(key in object) {
+            console.log(key+":"+object[key]);
+        }
+        console.log("-----------------------------");
+
+        for(key in object){
+            //判断是否为object对象的属性
+            if(object.hasOwnProperty(key)){
+                console.log(key+":"+object[key]);
+            }
+        }
+        console.log(Array.prototype);
+    </script>
+</head>
+<body>
+<button onclick="test()">测试局部变量和内部函数是否可以被删除</button>
+<button onclick="testIf(false)">测试</button>
+</body>
+</html>
