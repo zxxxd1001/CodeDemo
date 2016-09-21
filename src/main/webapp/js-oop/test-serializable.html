@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>序列化</title>
+    <script>
+        //序列化
+        var obj={x:1,y:true,z:[1,2,3],nullVal:null};
+        var str=JSON.stringify(obj);
+        console.log(str);
+        //需注意如果序列化的值有undefined 那么该属性就不会出现在结果当中
+        //属性的值为NaN 会转化成null
+        obj={val:undefined,a:NaN,b:Infinity,c:new Date()};
+        console.log(JSON.stringify(obj));
+
+        //反序列化
+        obj=JSON.parse(str);
+        console.log(obj.x,obj.y,obj);
+
+        obj={
+            x:1,
+            y:2,
+            o:{
+                o1:1,
+                o2:2,
+                toJSON:function(){
+                    return this.o1+this.o2;
+                }
+            }
+        }
+        str=JSON.stringify(obj);
+        console.log(str);
+
+        console.log("-----this-----");
+        console.log(this.document===document);
+        console.log(this===window);
+        this.a=37;
+        console.log(window.a);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象标签</title>
+    <script>
+        //proto,class,extensible
+        //class标签 表示这个对象是那一个类型
+        var toString=Object.prototype.toString;
+        function getType(o){
+            return toString.call(o).slice(8,-1);//slice(8,-1)目的是把[object Null] 中的 [object 和最后的]去掉
+        }
+        console.log(toString.call(null));
+        console.log(getType(null));
+        console.log(getType(undefined));
+        console.log(getType(1));
+        console.log(getType(new Number(1)));
+        console.log(typeof new Number(1));
+        console.log(getType(true));
+        console.log(getType(new Boolean(true)));
+        //extensible表示对象是否可可扩展 （对象上的属性是否可以被添加）
+        var obj={x:1,y:2};
+        console.log("对象是否可以扩展："+Object.isExtensible(obj));
+        Object.preventExtensions(obj);
+        console.log(Object.isExtensible(obj)+" Object.preventExtensions(obj)将对象设置为不可扩展");
+        obj.z=1;
+        console.log(Object.getOwnPropertyDescriptor(obj,"z"));
+        //阻止可扩展原本的configurable，writable，enumerable不会对其进行改变
+        console.log(Object.getOwnPropertyDescriptor(obj,"x"));
+        Object.seal(obj);
+        //通过seal方法configurable标签会变成false  不可以删除
+        console.log(Object.getOwnPropertyDescriptor(obj,"y"),Object.isSealed(obj)," 通过Object.isSealed方法判断属性是否被隐藏");
+
+        Object.freeze(obj);
+        //通过freeze方法可以将writable，configurable标签改为false 冻结属性
+        //不可以被修改，不可以被删除，不可改，不可以扩展
+        console.log(Object.getOwnPropertyDescriptor(obj,"x"),Object.isFrozen(obj)," 通过Object.isFrozen方法判断属性是否被冻结");
+
+        //以上的操作只是针对于一个对象的 当我们冻结对象的属性的时候，并不会影响对象的原型链
+        //所以说有的时候 想对原型链也做一些类似的处理的话 可以通过Object.getPrototypeOf
+        // 来拿到对象的原型链来一层一层的进行freeze
+    </script>
+</head>
+<body>
+
+</body>
+</html>

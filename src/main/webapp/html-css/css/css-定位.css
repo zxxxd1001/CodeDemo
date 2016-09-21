@@ -1,0 +1,91 @@
+body{
+    background-image:url('../img/test.jpeg');
+    background-attachment: fixed;
+    cursor:wait;
+}
+#ol{
+    font-weight: bold;
+}
+.div{
+    background-image: url('../img/div.jpg');
+    width: 495px;
+    height: 309px;
+    margin: 20px 500px;
+    /*border:1px solid red;*/
+}
+.div>li{
+    list-style-type:none;
+}
+.mr{
+   position: relative;
+    left:450px;
+    top:20px;
+}
+.ct{
+    position: relative;
+    left:380px;
+    top:40px;
+}
+.zz{
+    position: relative;
+    left:40px;
+}
+.xy{
+    position: relative;
+    left:120px;
+    top:20px;
+}
+.zz,.mr{
+    color:blue;
+    font-weight: bold;
+}
+.xy,.ct{
+    color: palevioletred;
+    font-weight: bold;
+}
+.mrjn{
+    position: absolute;
+    left:40px;
+    top:-17px;
+}
+.zzjn,.ctjn,.xyjn{
+    position: absolute;
+    left:35px;
+    top:-17px;
+}
+.mrjn,.zzjn{
+    color: #4169e1;
+}
+.ctjn,.xyjn{
+    color: #ce8483;
+}
+#fp{
+    float:right;
+}
+#ff{
+    border:1px solid red;
+}
+#tddd{
+    background-color: red;
+}
+.uldiv>ul,ol{
+    list-style-type:none;
+}
+.uldiv>ul>li{
+    font-size: 20px;
+    font-weight: bold;
+}
+.uldiv>ol>li{
+    font-size: 20px;
+    font-weight: bold;
+}
+.ulli1{
+    list-style-image: url('../img/plane.png');
+}
+.divh33>span{
+    font-weight: bold;
+    font-size: 30px;
+}
+.divh33{
+    color: #0078E7;
+}
