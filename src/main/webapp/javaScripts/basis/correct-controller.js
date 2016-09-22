@@ -2,16 +2,9 @@ angular.module("correctApp",[]);
 angular.module("correctApp").service("UseSer",["$location",function($location) {
     //模拟http返回数据
     var users = [
-        {
-            user: "admin",
-            id: "1"
-        }, {
-            user: "zhangxd",
-            id: "2"
-        }, {
-            user: "Sping",
-            id: "3"
-        }
+        {user: "admin", id: "1"},
+        {user: "zhangxd", id: "2"},
+        {user: "Sping", id: "3"}
     ];
     function User(use) {
         for(var i=0;i<users.length;i++){
