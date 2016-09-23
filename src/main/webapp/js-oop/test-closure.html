@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包</title>
+    <script>
+        function outer(){
+            var localVal=30;
+            return localVal;
+        }
+        console.log(outer());
+        function outerr(){
+            var localVal=30;
+            return function(){
+                return localVal;
+            };
+        }
+        console.log(outerr()());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

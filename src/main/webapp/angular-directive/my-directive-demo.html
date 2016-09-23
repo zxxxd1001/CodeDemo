@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myDirectiveApp">
+<head>
+    <meta charset="UTF-8" >
+    <title>指令小例子</title>
+    <link rel="stylesheet" href="../styles/common/jquery-ui.css">
+    <link rel="stylesheet" href="../styles/common/heren-v1.css">
+    <link rel="stylesheet" href="../styles/common/heren-datepicker.css">
+    <link rel="stylesheet" href="../styles/common/heren-select2.css">
+    <link rel="stylesheet" href="../styles/common/ng-grid.css">
+    <link rel="stylesheet" href="../styles/common/heren-component.css">
+
+</head>
+<body ng-controller="myDirectiveController">
+<header>
+
+</header>
+<section >
+
+</section>
+<footer class="content-footer btn-center">
+    <button class="btn btn-primary" ng-click="registerSubmit()">挂号支付</button>
+</footer>
+
+<clinic-dept-type options="checkChargeType" show="clinicDeptTypeShow" close="clinicDeptTypeClose()"></clinic-dept-type>
+<bill-payment-dialog-my options="checkChargeType" show="myBillPaymentDialogShow" close="billPaymentDialogClose()"></bill-payment-dialog-my>
+
+<script src="../javascripts/libs/jquery.js"></script>
+<script src="../javascripts/libs/select2.js"></script>
+<script src="../javascripts/libs/select2_locale_zh-CN.js"></script>
+<script src="../javascripts/libs/bootstrap.js"></script>
+<script src="../javascripts/libs/jquery-ui.js"></script>
+<script src="../javascripts/libs/jquery-ui-timepicker-addon.js"></script>
+<script src="../javascripts/libs/jquery-ui-timepicker-zh-CN.js"></script>
+<script src="../javascripts/libs/angular.js"></script>
+<script src="../javascripts/libs/angular-ui.js"></script>
+<script src="../javascripts/libs/ui-bootstrap-tpls.js"></script>
+<script src="../javascripts/libs/ng-grid.js"></script>
+<script src="../javascripts/libs/mousetrap.js"></script>
+<script src="../javascripts/libs/mousetrap-global.js"></script>
+<script src="../javascripts/common/utils.js"></script>
+<script src="../javascripts/common/heren-ui.js"></script>
+
+<script src="../javascripts/directive/my-directive-demo.js"></script>
+<script>
+    angular.module("myDirectiveApp",["firstDirective"]);
+    angular.module("myDirectiveApp").controller("myDirectiveController",["$scope",function($scope){
+        $scope.checkChargeType={};
+        $scope.clinicDeptTypeShow=false;
+        $scope.myBillPaymentDialogShow=false;
+        $scope.registerSubmit=function() {
+            $scope.checkChargeType.checkChargeType("张露","20","男");
+            $scope.clinicDeptTypeShow=true;
+        };
+        $scope.clinicDeptTypeClose=function(){
+            $scope.clinicDeptTypeShow=false;
+            console.log($scope.checkChargeType);
+            $scope.myBillPaymentDialogShow=true;
+        };
+        $scope.billPaymentDialogClose=function(){
+            $scope.myBillPaymentDialogShow = false;
+            var theChange=$scope.checkChargeType.result.theChange;
+            if(theChange!=0&&theChange!=undefined){
+                alert("支付成功！找零:"+theChange);
+            }else{
+                alert("支付成功！");
+            }
+        };
+    }]);
+</script>
+</body>
+</html>

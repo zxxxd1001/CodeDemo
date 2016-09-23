@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myCustomApp">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义filter</title>
+</head>
+<body ng-controller="myCustomController">
+<ul>
+    <li ng-repeat="date in date|filterAge">
+        <span ng-bind="date.name"></span>
+        <span ng-bind="date.age"></span>
+        <span ng-bind="date.city"></span>
+    </li>
+</ul>
+<hr>
+<ul>
+    <li ng-repeat="date in date|filtercity">
+        <span ng-bind="date.name"></span>
+        <span ng-bind="date.age"></span>
+        <span ng-bind="date.city"></span>
+    </li>
+</ul>
+<script type="text/javascript" src="../javascripts/libs/angular.js"></script>
+<script type="text/javascript" src="../javascripts/basis/custom-filter.js"></script>
+</body>
+</html>
