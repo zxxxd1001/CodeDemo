@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="tableApp">
 <head>
     <meta charset="UTF-8">
     <title>tableGrid指令</title>
 </head>
-<body>
+<body ng-controller="tableController">
 
+<div ng-grid="" table-grid="myTableGrid"></div>
+
+<script src="../javascripts/libs/jquery.js"></script>
+<script src="../javascripts/libs/angular.js"></script>
+<script src="../javascripts/directive/table-grid.js"></script>
+<script>
+    angular.module("tableApp",["tableGridApp"]).controller("tableController",["$scope",function($scope){
+        $scope.myTableGrid={
+            data:"data"
+        };
+        $scope.data=[
+                {id:1,name:"张三",age:18,sex:"男"},
+                {id:2,name:"李四",age:20,sex:"女"},
+                {id:3,name:"王五",age:22,sex:"男"}
+                ];
+    }]);
+</script>
 </body>
 </html>
