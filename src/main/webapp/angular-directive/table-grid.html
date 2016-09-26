@@ -3,24 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>tableGrid指令</title>
+    <link rel="stylesheet" href="../styles/common/jquery-ui.css">
+    <link rel="stylesheet" href="../styles/common/heren-v1.css">
+    <link rel="stylesheet" href="../styles/common/heren-select2.css">
+    <link rel="stylesheet" href="../styles/common/ng-grid.css">
+    <link rel="stylesheet" href="../styles/common/heren-datepicker.css">
+    <link rel="stylesheet" href="../styles/common/heren-component.css">
 </head>
 <body ng-controller="tableController">
+<header class="hc-search-area form-horizontal">
+    <div class="control-group">
+        <label class="control-label">科别名称</label>
 
-<div ng-grid="" table-grid="myTableGrid"></div>
-
+        <div class="controls">
+            <input type="text"/>
+            <button class="btn btn-primary margin-left10">查询(<span class="text-underline">Q</span>)</button>
+        </div>
+    </div>
+</header>
+<section class="mg0-5">
+    <!--<div table-grid="myTableGrid"></div>-->
+    <div my-table-grid="myTableGrid"></div>
+</section>
+<footer class="content-footer btn-center content-footer-border">
+    <button class="btn btn-primary" hr-table="" ng-click="test()">测试</button>
+</footer>
 <script src="../javascripts/libs/jquery.js"></script>
 <script src="../javascripts/libs/angular.js"></script>
-<script src="../javascripts/directive/table-grid.js"></script>
+<script src="../javascripts/directive/my-table-grid.js"></script>
 <script>
-    angular.module("tableApp",["tableGridApp"]).controller("tableController",["$scope",function($scope){
-        $scope.myTableGrid={
-            data:"data"
+    angular.module("tableApp", ["myTableGrid"]).controller("tableController", ["$scope", function ($scope) {
+        $scope.myTableGrid = {
+            data: "data"
         };
-        $scope.data=[
-                {id:1,name:"张三",age:18,sex:"男"},
-                {id:2,name:"李四",age:20,sex:"女"},
-                {id:3,name:"王五",age:22,sex:"男"}
-                ];
+        $scope.data = [
+            {id: 1, name: "张三", age: 18, sex: "男"},
+            {id: 2, name: "李四", age: 20, sex: "女"},
+            {id: 3, name: "王五", age: 22, sex: "男"}
+        ];
+        $scope.data2 = [
+            {id: 1, name: "张三", age: 18, sex: "男"},
+            {id: 2, name: "李四", age: 20, sex: "女"},
+            {id: 3, name: "王五", age: 22, sex: "男"}
+        ];
+        console.log($scope);
+        $scope.test=function(){
+            $scope.data.push({id: 4, name: "王五", age: 22, sex: "男"});
+            $scope.data2.push({id: 4, name: "王五", age: 22, sex: "男"});
+        };
     }]);
 </script>
 </body>
