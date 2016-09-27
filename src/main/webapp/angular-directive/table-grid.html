@@ -26,7 +26,7 @@
     <div my-table-grid="myTableGrid"></div>
 </section>
 <footer class="content-footer btn-center content-footer-border">
-    <button class="btn btn-primary" hr-table="" ng-click="test()">测试</button>
+    <button class="btn btn-primary" ng-click="test()">测试</button>
 </footer>
 <script src="../javascripts/libs/jquery.js"></script>
 <script src="../javascripts/libs/angular.js"></script>
@@ -34,22 +34,27 @@
 <script>
     angular.module("tableApp", ["myTableGrid"]).controller("tableController", ["$scope", function ($scope) {
         $scope.myTableGrid = {
-            data: "data"
+            data: "data",
+            columnDefs:[
+                {field: 'id', displayName: '序号', width: '25%'},
+                {field: 'name', displayName: '名字', width: '35%'},
+                {field: 'age', displayName: '年龄', width: '30%'},
+                {field: 'sex', displayName: '性别', width: '20%'}
+            ]
         };
         $scope.data = [
             {id: 1, name: "张三", age: 18, sex: "男"},
             {id: 2, name: "李四", age: 20, sex: "女"},
-            {id: 3, name: "王五", age: 22, sex: "男"}
-        ];
-        $scope.data2 = [
-            {id: 1, name: "张三", age: 18, sex: "男"},
-            {id: 2, name: "李四", age: 20, sex: "女"},
+            {id: 3, name: "王五", age: 22, sex: "男"},
+            {id: 3, name: "王五", age: 22, sex: "男"},
+            {id: 3, name: "王五", age: 22, sex: "男"},
+            {id: 3, name: "王五", age: 22, sex: "男"},
+            {id: 3, name: "王五", age: 22, sex: "男"},
             {id: 3, name: "王五", age: 22, sex: "男"}
         ];
         console.log($scope);
         $scope.test=function(){
             $scope.data.push({id: 4, name: "王五", age: 22, sex: "男"});
-            $scope.data2.push({id: 4, name: "王五", age: 22, sex: "男"});
         };
     }]);
 </script>
