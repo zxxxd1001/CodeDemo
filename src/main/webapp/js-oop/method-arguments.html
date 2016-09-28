@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>arguments</title>
+</head>
+<body>
+<script>
+    var method=function(x,y){
+        //1.在函数代码中，才可使用特殊对象 arguments，arguments对象不能显式创建。
+        //2.函数的 arguments 对象并不是一个数组，但是访问单个参数的方式与访问数组元素的方式相同。
+        //(访问函数中的第n个参数 则可以使用arguments[n-1])
+        var self=this;
+        self.name=function (x,y){
+            console.log(arguments[0]==x);
+            console.log("arguments",arguments);
+            console.log("arguments.length:是函数接受参数的个数（实参个数）",arguments.length);
+            console.log("arguments.callee",arguments.callee);
+            console.log("arguments.callee.length",arguments.callee.length);
+            console.log("arguments是函数中的一个对象",typeof arguments,arguments instanceof Object);
+            console.log("arguments不是一个数组",arguments instanceof Array,Array.isArray(arguments));
+            return x+y;
+        };
+        console.log(arguments[0]);
+        //将值绑定到this上
+        self.x=x;
+        self.y=y;
+        self.test=function(){
+            return self.x+self.y;
+        };
+    };
+    //构建函数
+    var a=new method(1,2);
+    a.name(2,3,4);
+    //从运行结果中看到 arguments对象喊包含length 和 callee这样的属性
+    console.log(a);
+    console.log(window);
+    //外界可以调用构建好的对象
+    console.log(a.test());
+</script>
+</body>
+</html>
