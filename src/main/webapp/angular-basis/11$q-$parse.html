@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="qPromiseApp">
+<head>
+    <meta charset="UTF-8">
+    <title>测试$q和then异步回调函数</title>
+</head>
+<body ng-controller="qPromiseController">
+<button ng-click="triggerIncident()">触发事件</button>
+<button ng-click="triggerIncidentTwo()">触发事件2</button>
+<h4>promise即与这个defer对象的承诺对象。</h4>
+<button ng-click="triggerParse()">触发parse事件</button>
+<script src="../javascripts/libs/angular.js"></script>
+<script src="../javascripts/basis/q-parse.js"></script>
+</body>
+</html>
