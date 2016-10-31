@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+</head>
+<body>
+<script>
+    var dateTemplate=['2006/02/03','test/07/sd','2016/05/10','1998-02-07','12345/23/45678','1234/23/45667','12345/23/45'];
+    var dateReg=/\d{4}[/-]\d{2}[/-]\d{2}/;   //[] 表示或者 [/-] /或- 都可以  {} 表示量词 \d{4} 四个数字
+    var template=[];
+    for(var i=0;i<dateTemplate.length;i++){
+        if(dateTemplate[i].match(dateReg)!=null){
+            template.push(dateTemplate[i]);
+        }
+    }
+    console.log(template);
+
+    dateReg=/^\d{4}[/-]\d{2}[/-]\d{2}$/; // ^ 表示 开头 $ 表示 结尾
+    template=[];
+    for(var i=0;i<dateTemplate.length;i++){
+        if(dateTemplate[i].match(dateReg)!=null){
+            template.push(dateTemplate[i]);
+        }
+    }
+    console.log(template);
+
+    dateReg=/^(\d{4})[/-](\d{2})[/-](\d{2})$/; //() 表示分组  分别是第一组，第二组... $1 $2 获取分组内容
+    template=[];
+    for(var i=0;i<dateTemplate.length;i++){
+        if(dateTemplate[i].match(dateReg)!=null){
+            template.push(dateTemplate[i].replace(dateReg,'$3/$2/$1'));
+        }
+    }
+    console.log(template);
+
+    //字面量
+    var reg=/\bis\b/; // \b 表示单词边界
+    console.log('He is a boy.This is a dog. Where is she?'.replace(reg,'IS'));//按照reg 替换IS
+    reg=/\bis\b/g; //g 表示 global 全文搜索 不添加，搜索到第一个匹配停止
+    console.log('He is a boy.This is a dog. Where is she?'.replace(reg,'IS'));
+
+    //构造函数
+    reg=new RegExp('\\bis\\b','g');
+    console.log('He is a boy.This is a dog. Where is she?'.replace(reg,'IS'));
+
+    //修饰符
+    reg=/\bis\b/g;
+    console.log('He is a boy. Is he?'.replace(reg,'0'));
+    reg=/\bis\b/gi; //i 表示 ignore case 忽略大小写，默认大小写敏感
+    console.log('He is a boy. Is he?'.replace(reg,'0'));
+    //m 表示 multiple lines 多行搜索
+
+</script>
+</body>
+</html>
