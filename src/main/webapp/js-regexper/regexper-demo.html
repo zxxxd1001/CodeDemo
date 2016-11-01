@@ -99,6 +99,42 @@
     //忽略分组
     console.log('zhangxuedong'.replace(/(z)|(g)/g,'Q'));
     console.log('zhangxuedong'.replace(/(z)|(?:g).(ok)/g,'Q'));
+
+    //前瞻 和 后顾 javascript不支持
+    //正则表达式从文本头部向尾部开始解析，文本尾部方向，称为“前”。 文本头部 叫做“后”
+    //前瞻就是在正则表达式匹配规则的时候，向前检查是否符合断言， 后顾 方向相反。
+    //符合和不符合特定断言称为 正向匹配和负向匹配 （符合规则和不符合规则）
+    //正向前瞻 exp(?=assert) 负向前瞻 exp(?!assert)  正向后顾exp(?<=assert) 负向后顾exp(?<!assert)
+    console.log('a2*334b5bb'.replace(/\w(?=\d)/g,'T'));
+    console.log('a2*334b5bb'.replace(/\w(?!\d)/g,'T'));
+
+    //global:是否全文搜索，默认false
+    //ignore case:是否大小写敏感，默认false
+    //multiline :多行搜索，默认值是false
+    //lastIndex: 是当前表达式匹配内容的最后一个字符的下一个位置  在非全局表达式中不生效 重要
+    // source: 正则表达式的文本字符串
+    var reg1=/\w/;
+    var reg2=/\w/gim;
+    console.log(reg1.global,reg1.ignoreCase,reg1.multiline,reg1.source);
+    console.log(reg2.global,reg2.ignoreCase,reg2.multiline,reg2.source);
+    console.log(reg1.test('a'));
+
+    console.log(reg2.test('a'),reg2.lastIndex);
+    console.log(reg2.test('a'),reg2.lastIndex);//影响lastIndex
+    //exec() 使用正则表达式模式对字符串执行搜索，并将更新全局RegExp对象的属性以反映匹配结果
+    //如果没有匹配的文本则返回null，否则返回一个结果数组
+    // index 声明匹配文本的第一个字符的位置
+    // input 存放被检索的字符串
+    var reg3=/\d(\w)(\w)\d/;
+    var reg4=/\d(\w)(\w)\d/g;
+    var ts='$1az2by3cy4de5ep';
+    var ret=reg3.exec(ts);
+    console.log(reg3.lastIndex,ret.index,ret);
+    console.log(reg3.lastIndex,ret.index,ret);   // 正则表达式相匹配的文本
+
+    while(ret=reg4.exec(ts)){
+        console.log(reg4.lastIndex,ret.index,ret);
+    }
 </script>
 </body>
 </html>
