@@ -49,8 +49,56 @@
     console.log('He is a boy. Is he?'.replace(reg,'0'));
     reg=/\bis\b/gi; //i 表示 ignore case 忽略大小写，默认大小写敏感
     console.log('He is a boy. Is he?'.replace(reg,'0'));
-    //m 表示 multiple lines 多行搜索
+    reg=/@\d/gm; //m 表示 multiple lines 多行搜索
+    console.log('@123\n@456\n@789'.replace(reg,'Q'));
 
+    //正则表达式由两种基本字符类型组成
+    // 1.原义文本字符 如 abc 1234
+    // 2.元字符  解: 在正则表达式中有特殊含义的非字母字符
+    // 如 \b * + ? & ^ . | \ ( ) { } [ ] \t \v \n \0 \r \f \cX  含义并不唯一 在不同的书写方式中有不同的含义
+
+    //字符类[abc]   取反 [^abc]
+
+    //范围类  [a-z]  匹配所有的小写字母   [a-zA-Z] [a-z-]
+    //预定义类 .除了回车符和换行符之外的所有字符  \d数字 \D非数字 \s空开符 \S非 \w单词字符[数字,字母,下划线] \W非
+    //边界匹配字符 ^用..开始 $以..结束 \b单词边界 \B非
+    reg=/is/g;
+    console.log('This is a boy'.replace(reg,'0'));
+    reg=/\bis/g;
+    console.log('This is a boy'.replace(reg,'0'));
+    reg=/\Bis/g;
+    console.log('This is a boy'.replace(reg,'0'));
+
+    reg=/@./g;
+    console.log('@123@abc@'.replace(reg,'Q'));
+    reg=/^@./g;
+    console.log('@123@abc@'.replace(reg,'Q'));
+    reg=/.@/g;
+    console.log('@123@abc@'.replace(reg,'Q'));
+    reg=/.@$/g;
+    console.log('@123@abc@'.replace(reg,'Q'));
+
+    //量词 表示数量的词
+    // ? 出现零次或一次(最多出现一次) + 出现一次或多次(至少出现一次) * 出现零次或多次(任意次)
+    // {n} 出现n次 {n,m}出现n到m次 {n,} 至少出现n次
+    console.log('12345678'.replace(/\d{3}/,'X'));
+    //贪婪模式: 正则表达式在配置时 会尽可能多的匹配 直到匹配失败
+    console.log('12345678'.replace(/\d{3,6}/,'X'));
+    //非贪婪模式: 让正则表达式尽可能少的匹配，也就是说一旦成功匹配就不再继续匹配
+    console.log('12345678'.replace(/\d{3,6}?/,'X'));
+    console.log('12345678'.replace(/\d{3,6}?/g,'X'));
+    console.log('a1b2c3d444'.replace(/\w\d{3}/,'X'));//量词 只可以作用于紧挨这的
+
+    //分组
+    console.log('a1b2c3d444'.replace(/(\w\d){3}/,'X'));//使量词作用于分组
+    //或 |
+    console.log('zhangxuedong'.replace(/zhang|dong/g,'Q'));
+    console.log('ByronsperByrCasper'.replace(/Byr(on|Ca)sper/g,'Q'));//Byronsper |ByrCasper
+    //方向引用
+    console.log('2006/02/03'.replace(/(\d{4})\/(\d{2})\/(\d{2})/,"$3-$2-$1"));
+    //忽略分组
+    console.log('zhangxuedong'.replace(/(z)|(g)/g,'Q'));
+    console.log('zhangxuedong'.replace(/(z)|(?:g).(ok)/g,'Q'));
 </script>
 </body>
 </html>
