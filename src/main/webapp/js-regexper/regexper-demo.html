@@ -135,6 +135,42 @@
     while(ret=reg4.exec(ts)){
         console.log(reg4.lastIndex,ret.index,ret);
     }
+
+
+    //字符串正则方法  如果见过的参数不是正则表达式 方法会尝试转成正则表达式
+    /**
+     * search()方法用于检索字符串中指定的子字符串，或则检索 匹配正则表达式的子字符串
+     *  方法返回 匹配结果index 查不到返回 -1
+     *  search()不执行 全局匹配 忽略g ，总是从字符串开始进行检索
+     */
+    console.log('a1b2c3d1'.search('1'));// 检索到，返回字符串下标
+    console.log('a1b2c3d1'.search('10'));//检索不到 返回-1
+    console.log('a1b2c3d1'.search(2));
+    /**
+     * match() 返回一个数组，其中存放匹配相关的内容，如果没有找到任何信息者返回null  没有g 只执行一次匹配
+     *
+     */
+    var regMatch=/\d(\w)\d/;
+    var regMatchG=/\d(\w)\d/g;
+    var ts='1a2b3c4d5e';
+    console.log(ts.match(regMatch));
+    console.log(ts.match(regMatch).index,regMatch.lastIndex);
+    //全局的匹配比 exec() 信息少 如果只是需要匹配的值 用这个效率高
+    console.log(ts.match(regMatchG));
+    console.log(ts.match(regMatchG).index,regMatchG.lastIndex);
+
+    /**
+     * split() ,使用正则表达式去匹配 指定格式的数据会比较方便
+     */
+    console.log('a,b,c,d'.split(','));
+    console.log('a1b2c3d4'.split(/\d/));
+    console.log('a,b,c,d'.split(/,/));
+    console.log('a,b|c|d'.split(/[,|]/));
+    /**
+     * replace()
+     */
+    console.log('a1b'.replace('1',2));
+
 </script>
 </body>
 </html>
