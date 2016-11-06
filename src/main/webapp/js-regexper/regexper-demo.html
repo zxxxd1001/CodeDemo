@@ -170,7 +170,19 @@
      * replace()
      */
     console.log('a1b'.replace('1',2));
+    console.log('a1b1c1d1'.replace('1',2));//隐士装正则 /1/
+    console.log('a1b1c1d1'.replace(/1/g,2));
 
+    //1.匹配字符串 [2.正则表达式分组内容，没有分组则没有该参数]
+    //3.匹配项在字符串的index 4.原数组
+    console.log('a1b2c3d4'.replace(/\d/g,function(match,index,origin){
+        console.log(match,index,origin);
+        return parseInt(match)+1;
+    }));
+    console.log('a1b2c3d4'.replace(/(\d)(\w)(\d)/g,function(match,group1,group2,group3,index,origin){
+        console.log(match,group1,group2,group3,index,origin);
+        return group1+group3;
+    }));
 </script>
 </body>
 </html>
