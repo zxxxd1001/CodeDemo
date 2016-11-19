@@ -8,6 +8,7 @@ sourceCompatibility = 1.5
 project.ext {
     junitVersion = '4.12'
     poiVersion='3.15-beta1'
+    jxlVersion="2.6.12"
 }
 
 repositories {
@@ -19,4 +20,5 @@ dependencies {
     testCompile "junit:junit:$junitVersion"
     compile "org.apache.poi:poi:$poiVersion"
     compile "org.apache.poi:poi-ooxml:$poiVersion"
+    compile "net.sourceforge.jexcelapi:jxl:$jxlVersion"
 }
