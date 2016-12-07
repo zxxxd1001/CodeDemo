@@ -9,6 +9,7 @@ project.ext {
     junitVersion = '4.12'
     poiVersion='3.15-beta1'
     jxlVersion="2.6.12"
+    springVersion='4.3.3.RELEASE'
 }
 
 repositories {
@@ -21,4 +22,8 @@ dependencies {
     compile "org.apache.poi:poi:$poiVersion"
     compile "org.apache.poi:poi-ooxml:$poiVersion"
     compile "net.sourceforge.jexcelapi:jxl:$jxlVersion"
+
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-aop:$springVersion"
+    compile "org.springframework:spring-test:$springVersion"
 }
