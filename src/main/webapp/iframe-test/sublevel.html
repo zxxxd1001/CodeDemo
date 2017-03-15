@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加载子页面</title>
+    <script src="../javascripts/libs/jquery.js"></script>
+    <script type="text/javascript">
+
+        var ff="adfdasfdsafdsafdsaf";
+        function test() {
+            alert($("#dd").val());
+        }
+        function callMainField() {
+            alert(parent.gg);
+        }
+        function callMainMethod() {
+            parent.ggMM();
+        }
+        function callMainHtml() {
+            alert(parent.$("#ii").attr("id"));
+        }
+        function getParameter() {
+            alert(window.hellobaby);
+        }
+        function print(){
+            var data={
+                type:'print',
+                objcet:['1','2']
+            };
+            window.parent.top.postMessage(data, "*");
+        }
+    </script>
+</head>
+<body>
+<a href="#" onClick="getParameter();">接受参数</a>
+<a href="#" onClick="callMainMethod();">调用子iframe方法</a>
+<a href="#" onClick="callMainField();">调用主窗口变量</a>
+<a href="#" onClick="callMainHtml();">调用子iframe组件</a>
+<button onclick="print()">打印demo</button>
+<input id="dd" type="text" value="1111111111"/>
+</body>
+</html>

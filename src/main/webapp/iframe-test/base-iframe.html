@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主框架</title>
+    <script src="../javascripts/libs/jquery.js"></script>
+    <script type="text/javascript">
+        var gg = "dsafdsafdsafdsafsdaf";
+        function ggMM() {
+            alert("2222222222222222222222222222222");
+        }
+        function callIframeMethod() {
+            //document.getElementById("ii").contentWindow.test();
+            $("#ii")[0].contentWindow.test(); //用jquery调用需要加一个[0]
+        }
+        function callIframeField() {
+            alert($("#ii")[0].contentWindow.ff);
+        }
+        function callIframeHtml() {
+            alert($("#ii")[0].contentWindow.$("#dd").val());
+            //alert($("#ii")[0].contentWindow.document.getElementById("dd").value);
+            //alert($("#ii")[0].contentWindow.document.getElementById("dd").value);
+        }
+        function giveParameter() {
+            $("#ii")[0].contentWindow.hellobaby = "dsafdsafsdafsdafsdafsdafsadfsadfsdafsadfdsaffdsaaaaaaaaaaaaa";
+        }
+        window.addEventListener("message",function(event){
+            alert(event.data.type);
+            console.log(event);
+            console.log(event.data);
+        });
+    </script>
+</head>
+<body>
+<a href="#" onClick="giveParameter();">参数传递</a>
+<a href="#" onClick="callIframeMethod();">调用子iframe方法</a>
+<a href="#" onClick="callIframeField();">调用子iframe变量</a>
+<a href="#" onClick="callIframeHtml();">调用子iframe组件</a></br>
+<iframe id="ii" src="sublevel.html" width="100%" frameborder="0"></iframe>
+<iframe id="new" src="child.html" width="100%" frameborder="0"></iframe>
+</body>
+</html>
