@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试子级获取最顶级window对象</title>
+   <script>
+       function getParameter(){
+           window.top.ggMM();
+           console.log(window.top);
+       }
+   </script>
+</head>
+<body>
+<button onclick="getParameter()">测试子级获取最顶级window对象</button>
+</body>
+</html>

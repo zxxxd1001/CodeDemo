@@ -36,5 +36,7 @@ public class Test {
                 System.out.println(enumTest);
                 break;
         }
+
+        System.out.println(RcptType.OUTP.getValue());
     }
 }
