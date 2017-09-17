@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="../styles/official/bootstrap.css">
+    <style>
+        .login{
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color:#eee;
+        }
+        .form-signin{
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-signin input{
+            font-size: 16px;
+            height: auto;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        #inputPassword{
+            margin-bottom: 10px;
+        }
+
+        .footer{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            /*background-color: #f5f5f5;*/
+            background-color: #eee;
+        }
+        .footer .container{
+            width: auto;
+            max-width: 680px;
+            padding: 0 15px;
+            margin-left: auto;
+            margin-top: auto;
+            font-size: 13px;
+            text-align: center;
+        }
+        .footer .container p{
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .footer-border{
+            border-top:1px solid #e5e5e5 ;
+        }
+    </style>
+</head>
+<body class="login">
+<section class="container">
+
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+</section>
+<footer class="footer footer-border">
+    <div class="container">
+        <p class="text-muted">隐私保护　私人　版权所有　京ICP证000007</p>
+        <p class="text-muted">客户服务热线：40081231231　违法和不良信息举报电话：18511057407　举报邮箱：zxxxd1001@126.com.</p>
+    </div>
+</footer>
+</body>
+</html>
