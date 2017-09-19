@@ -59,5 +59,16 @@ public class BigDecimalDemo {
         double d=1252.2563;
         String st=dff.format(d);
         System.out.println(st);
+
+        testCompareTo();
+    }
+
+    public static void testCompareTo(){
+        BigDecimal b=BigDecimal.ZERO,
+                o=BigDecimal.ONE,
+                c=BigDecimal.TEN;
+        System.out.println("testCompareTo："+b+","+o);
+        System.out.println("compareTo："+b.compareTo(o));
+        System.out.println("compareTo："+c.compareTo(b));
     }
 }
