@@ -1,5 +1,8 @@
 package testGC;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by zhangxuedong on 2017/9/5.
  */
@@ -15,6 +18,7 @@ public class TestGC {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println(9%3);
         try {
             c = new TestGC();
             // 对象第一次成功拯救自己

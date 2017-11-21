@@ -6,44 +6,49 @@
     <link rel="stylesheet" href="../styles/official/bootstrap.css">
     <link rel="stylesheet" href="../styles/official/bootstrap-theme.css">
     <style>
-        section{
-            color: inherit;
-            height: 500px;
+        body{
             background-color: #eee;
+        }
+        #myCarousel {
+            top:51px;
+        }
+        #myCarousel img{
+            height:500px;
+            /*text-align: center;*/
+            margin: auto;
         }
     </style>
 </head>
 <body class="base-framework">
-<header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Project name</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#game">Game</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Sign in</a></li>
-                    <li><a href="#">Sign up</a></li>
-                </ul>
-            </div>
+<!--bootstrap导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
         </div>
-    </nav>
-</header>
-<section>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#game">Game</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Sign in</a></li>
+                <li><a href="#">Sign up</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--bootstrap轮播插件-->
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -91,8 +96,7 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-</section>
-<section class="jumbotron">
+<div class="jumbotron">
     <div class="container">
         <h1>Hello, world!</h1>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a
@@ -100,12 +104,50 @@
             unique.</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
     </div>
-</section>
+</div>
 
 <script src="../javascripts/official/jquery-3.2.1.js"></script>
 <script src="../javascripts/official/bootstrap.js"></script>
 <script>
+    window.onload=function(){
+//        $('#myCarousel').carousel({
+//            interval: 100
+//        })
+    };
     console.log(window.opera);
+
+    //缩放图片到合适大小
+    function ResizeImages()
+    {
+        var myimg,oldwidth,oldheight;
+        var maxwidth=550;
+        var maxheight=880;
+        var imgs = document.getElementById('myCarousel').getElementsByTagName('img');   //如果你定义的id不是myCarousel，请修改此处
+
+        for(i=0;i<imgs.length;i++){
+            myimg = imgs[i];
+
+            if(myimg.width > myimg.height)
+            {
+                if(myimg.width > maxwidth)
+                {
+                    oldwidth = myimg.width;
+                    myimg.height = myimg.height * (maxwidth/oldwidth);
+                    myimg.width = maxwidth;
+                }
+            }else{
+                if(myimg.height > maxheight)
+                {
+                    oldheight = myimg.height;
+                    myimg.width = myimg.width * (maxheight/oldheight);
+                    myimg.height = maxheight;
+                }
+            }
+        }
+    }
+    //缩放图片到合适大小
+  //  ResizeImages();
+
 </script>
 </body>
 </html>
