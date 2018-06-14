@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component组件state2</title>
+</head>
+<body>
+<div id="example"></div>
+<div id="example1"></div>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script type="text/babel">
+    class App extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+                todos:["吃饭","睡觉","打豆豆"]
+            };
+            this.add=this.add.bind(this);
+        }
+        add(data){
+            let todos=this.state.todos;
+            todos.unshift(data);
+            this.setState({
+                todos:todos
+            });
+        }
+        render(){
+            return(
+                <div>
+                    Simple TODO List
+                    <AddToDo add={this.add} len={this.state.todos.length}/>
+                    <ToDoList todos={this.state.todos}/>
+                </div>
+            )
+        }
+    }
+    class AddToDo extends React.Component{
+        constructor(props){
+            super(props);
+            this.add=this.add.bind(this);
+        }
+        add(){
+            this.props.add(this.refs.input.value);
+            this.refs.input.value="";
+        }
+        render(){
+            return (
+                <div>
+                    <input ref="input" type="text"/>
+                    <button onClick={this.add}>addToDo ${this.props.len}</button>
+                </div>
+            )
+        }
+    }
+    class ToDoList extends React.Component{
+        render(){
+            let todos=this.props.todos;
+            return (
+                <ul>
+                    {
+                        todos.map((item,index)=><li key={index}>{item}</li>)
+                    }
+                </ul>
+            )
+        }
+    }
+    ReactDOM.render(<App/>,document.getElementById("example"));
+
+    class TowWay extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+                msg:"github.com/zxxxd1001",
+                opacity:1
+            };
+            this.valueChange=this.valueChange.bind(this);
+        }
+        //挂载
+        componentDidMount(){
+            this.timerId=setInterval(()=>{
+                var {opacity}=this.state;
+                if(this.state.opacity<0.1){
+                   opacity=1;
+                }
+                this.setState({opacity:opacity-0.05})
+            },100);
+        }
+        //卸载
+        componentWillUnmount(){
+            clearInterval(this.timerId);
+        }
+        valueChange(e){
+            this.setState({
+                msg:e.target.value
+            });
+        }
+        render(){
+            var {msg}=this.state;
+            var {opacity}=this.state;
+            return (
+                <div>
+                    <input type="text" onChange={this.valueChange} value={msg}/>
+                    <p style={{opacity}}>{msg}</p>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<TowWay/>,document.getElementById("example1"));
+</script>
+</body>
+</html>

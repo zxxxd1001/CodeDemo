@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react生命周期</title>
+</head>
+<body>
+
+<div id="example"></div>
+
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script type="text/babel">
+    class Notes extends React.Component{
+        render(){
+            console.log(this);
+            return <p>{this.props.flag?"true":"false"}</p>;
+        }
+        componentWillUpdate(nextProps, nextState){//更新
+            /**
+             * 组件初始化时不调用，只有在组件将要更新时才调用，此时可以修改state
+             */
+            console.log("Notes：componentWillUpdate");
+        }
+        componentDidUpdate(){//更新
+            /**
+             * 组件初始化时不调用，组件更新完成后调用，此时可以获取dom节点。
+             */
+            console.log("Notes：componentDidUpdate");
+        }
+        componentWillUnmount(){//销毁
+            console.log("Notes：componentWillUnmount");
+        }
+    }
+    class TestComponentWillReceiveProps extends React.Component{
+        componentWillReceiveProps(nextProps){//更新
+            /**
+             * 组件初始化时不调用，组件接受新的props时调用。
+             */
+            console.log("TestComponentWillReceiveProps：componentWillReceiveProps");
+            console.log(nextProps);
+        }
+        componentWillUpdate(nextProps, nextState){//更新
+            /**
+             * 组件初始化时不调用，只有在组件将要更新时才调用，此时可以修改state
+             */
+            console.log("TestComponentWillReceiveProps：componentWillUpdate");
+        }
+        render(){
+            return <p>componentWillReceiveProps： {this.props.flag?"true":"false"}</p>;
+        }
+    }
+    class App extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+                flag:false
+            };
+            this.pClick=this.pClick.bind(this);
+        }
+        pClick(){
+            this.setState({
+                flag:!this.state.flag
+            });
+        }
+        componentWillReceiveProps(nextProps){//更新
+            /**
+             * 组件初始化时不调用，组件接受新的props时调用。
+             */
+            console.log("componentWillReceiveProps");
+        }
+        shouldComponentUpdate(nextProps, nextState){//更新
+            /**
+             * react性能优化非常重要的一环。
+             * 组件接受新的state或者props时调用，
+             * 我们可以设置在此对比前后两个props和state是否相同，
+             * 如果相同则返回false阻止更新，
+             * 因为相同的属性状态一定会生成相同的dom树，
+             * 这样就不需要创造新的dom树和旧的dom树进行diff算法对比，
+             * 节省大量性能，尤其是在dom结构复杂的时候
+             */
+            console.log("shouldComponentUpdate");
+
+            return true;
+        }
+        componentWillMount(){//初始化
+            /**
+             * 组件初始化时只调用，以后组件更新不调用，整个生命周期只调用一次，此时可以修改state。
+             */
+            console.log("即将进入dom componentWillMount");
+        }
+        componentWillUpdate(nextProps, nextState){//更新
+            /**
+             * 组件初始化时不调用，只有在组件将要更新时才调用，此时可以修改state
+             */
+            console.log(nextProps, nextState);
+            console.log("componentWillUpdate");
+        }
+        render(){//初始化
+            /**
+             * react最重要的步骤，创建虚拟dom，进行diff算法，更新dom树都在此进行。此时就不能更改state了。
+             */
+            console.log("render 渲染");
+            return (
+              <div>
+                  <p onClick={this.pClick}> {this.state.flag?"NO":"OFF"}</p>
+                  {this.state.flag?<Notes flag={this.state.flag}/>:""}
+                  <TestComponentWillReceiveProps flag={this.state.flag}/>
+              </div>
+            );
+        }
+        componentDidMount(){//初始化
+            /**
+             * 组件渲染之后调用，只调用一次。
+             */
+            console.log("已经进入dom componentDidMount");
+        }
+        componentDidUpdate(){//更新
+            /**
+             * 组件初始化时不调用，组件更新完成后调用，此时可以获取dom节点。
+             */
+            console.log("componentDidUpdate");
+        }
+        componentWillUnmount(){//销毁
+            console.log("componentWillUnmount");
+        }
+    }
+    ReactDOM.render(<App/>,document.getElementById("example"));
+</script>
+</body>
+</html>

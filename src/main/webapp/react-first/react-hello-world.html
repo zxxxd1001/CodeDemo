@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>helloWorld</title>
+</head>
+<body>
+<div id="example"></div>
+<div id="root"></div>
+<div id="date"></div>
+<div id="tom"></div>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script type="text/babel">
+    var style={
+        fontSize:40
+    };
+    //第一 jsx
+    ReactDOM.render(<div style={style} className="hello">{/*注释*/}hello world</div>,document.getElementById("example"));
+
+    console.log(ReactDOM);
+    console.log(React);
+    console.log(document.getElementsByClassName("hello"));
+
+    //第二
+    function formatName(user) {
+        return user.firstName + ' ' + user.lastName;
+    }
+    const user = {
+        firstName: 'Harper',
+        lastName: 'Perez'
+    };
+    const array=["1","2","3"];
+    const element = (
+        <div>
+            <h1>Hello, {formatName(user)}!</h1>
+            <div>{array}</div>
+            <div>{array.map(function(item,index){
+                return <li key={index}>{item}</li>;
+            })}</div>
+        </div>
+    );
+    ReactDOM.render(
+        element,
+        document.getElementById('root')
+    );
+
+    //第三 纯js 不常用不够灵活
+    const img = React.createElement(
+        'img',
+        {src: 'tom.jpg'},
+        null
+    );
+    const div = React.createElement(
+        'div',
+        null,
+        'hell world'
+    );
+    ReactDOM.render(
+        img,
+        document.getElementById('tom')
+    );
+
+    //第四
+    function tick() {
+        const element = (
+            <h2>It is {new Date().toLocaleTimeString()}.</h2>
+        );
+        ReactDOM.render(element, document.getElementById('date'));
+        setInterval(tick, 1000);
+    }
+    tick();
+
+</script>
+</body>
+</html>

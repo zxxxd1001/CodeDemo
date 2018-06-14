@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script src="../javascripts/react/axios.js"></script>
+<script type="text/babel">
+    /**
+     *  React没有ajax模块
+     *  集成其它的js库(如jQuery/fetch/axios), 发送ajax请求
+     */
+    var url="http://localhost/heren/api/base/staff-dicts/all";
+
+    /**
+     * fetch
+     * 文档：https://github.github.io/fetch/#response-body
+     */
+    fetch(url).then((response) => {
+        console.log(response);
+        console.log(response.json());
+        return response.json();
+    }).then((data) => {
+        console.log(data);
+    }).catch((e) => {
+        console.log(e);
+        console.log("Oops, error");
+    });
+
+    /**
+     * axios
+     * 文档：
+     *      https://github.com/axios/axios
+     *      https://www.jianshu.com/p/df464b26ae58
+     */
+    axios.get(url)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+</script>
+</body>
+</html>

@@ -8,13 +8,17 @@
     <!--<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>-->
     <script src="../javascripts/react/react.js"></script>
     <script src="../javascripts/react/react-dom.js"></script>
+    <script src="../javascripts/react/babel.min.js"></script>
     <!--<script type="text/babel" src="../javascripts/react/browserjs.js"></script>-->
-    <!--<script src="../javascripts/react/browser.min.js"></script>-->
 </head>
 <body>
 <div id="example"></div>
 <div id="app"></div>
-<script>
+<div id="easy"></div>
+<!-- 使用jsx语法必须定义 type="text/babel"  否则
+    报Uncaught SyntaxError: Unexpected token <  不认识  <h1>Hello, world!</h1>-->
+<script type="text/babel">
+    console.log(ReactDOM);
     var HelloMessage = React.createClass(
         {
             displayName: "HelloMessage",
@@ -22,24 +26,23 @@
                 return React.createElement("h1", null, "Hello ", this.props.name);
             }
         });
+    /**
+     * JSX  {}    JSX 中使用 JavaScript 表达式
+     * 在 JSX 中不能使用 if else 语句，但可以使用 conditional (三元运算) 表达式来替代
+     */
     ReactDOM.render(React.createElement(HelloMessage, {name: "John"}), document.getElementById("example"));
     ReactDOM.render(React.createElement("h1", null,"Hello World!"), document.getElementById("app"));
 
     //引入browser.min.js才可以使用JSX语法
     //http://www.w3cplus.com/react/taming-react-setup.html
-//    ReactDOM.render(
-//            <h1>Hello, world!</h1>,
-//        document.getElementById('example')
-//    );
+    ReactDOM.render(
+            <h1>Hello, world!</h1>,
+        document.getElementById('easy')
+    );
     var c="sadas";
      c=123;
     console.log(typeof c);
     console.log(1<<7);
-    function t(){
-        console.log(arguments);
-    }
-    t("123",123);
-
     var data={
         a:"!23"
     };

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component组件props</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script type="text/babel">
+    /**
+     *  Props的只读性
+     */
+    class App extends React.Component {
+        render() {
+            // let arr = this.props.arr;
+            return (
+                <div>
+                    {
+                        this.welcome()
+                        /*
+                        arr.map((item, index) => {
+                            return <Welcome name={item.name} key={index}/>
+                        })
+                        */
+                    }
+                </div>
+            )
+        }
+        welcome(){
+            let arr = this.props.arr;
+            return arr.map((item, index) => {
+                /**
+                 * {...item.name} 三点运算符
+                 */
+                return <Welcome {...item} key={index}/>
+            });
+        }
+    }
+
+    function Welcome(props) {
+        return <h1>Welcome,{props.name}。{props.age}</h1>
+    }
+
+    var personArr = [{name: "张三",age:20}, {name: "李四",age:21}, {name: "王五",age:22}];
+    ReactDOM.render(<App arr={personArr}/>, document.getElementById("app"));
+
+</script>
+</body>
+</html>

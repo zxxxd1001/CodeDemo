@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component组件</title>
+</head>
+<body>
+<div id="example"></div>
+<div id="example1"></div>
+<div id="welcome"></div>
+<div id="welcomeClass"></div>
+<div id="app"></div>
+<div id="comment"></div>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script src="../javascripts/react/prop-types.js"></script>
+<script type="text/babel">
+    /**
+     * 警告:
+     *      组件名称必须以大写字母开头。不能重复声明名字相同组件
+     * 例如，<div /> 表示一个DOM标签，但 <Welcome /> 表示一个组件，并且在使用该组件时你必须定义或引入它
+     *      组件的返回值只能有一个根元素。这也是我们要用一个<div>来包裹<Welcome /><HelloWorld />元素的原因。
+     *
+     * Props的只读性
+     */
+    /*组件必须驼峰命名 es5老语法 早不用 */
+    var HelloWorld=React.createClass({
+        render : function(){
+            return  <h1>Hello {this.props.name}!</h1>;
+        }
+    });
+    ReactDOM.render(<HelloWorld name="zhang"/>,document.getElementById("example"));
+    var WebSite = React.createClass({
+        render: function() {
+            return (
+                <div>
+                    <Name name={this.props.n} />
+                    <Link site={this.props.s} />
+                </div>
+            );
+        }
+    });
+
+    var Name = React.createClass({
+        render: function() {
+            return <h1>{this.props.name}</h1>;
+        }
+    });
+
+    var Link = React.createClass({
+        render: function() {
+            return <a href={this.props.site}>{this.props.site}</a>;
+        }
+    });
+    ReactDOM.render(
+        <WebSite n="菜鸟教程" s=" http://www.runoob.com" />,
+        document.getElementById('example1')
+    );
+    /*es5老语法 早不用 */
+
+    /*es6*/
+    //定义组件最简单的方法是编写一个JavaScript函数: //无状态,this指向undefined
+    function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+    }
+    ReactDOM.render(<Welcome name="zhang"/>,document.getElementById("welcome"));
+
+    //类定义组件
+    class Extend extends React.Component{
+        render(){
+            return <h1>class Welcome extends {this.props.name}</h1>
+        }
+    }
+    ReactDOM.render(<Extend name="React.Component"/>,document.getElementById("welcomeClass"));
+    /**
+     * 我们对<Welcome name="zhang" />元素调用了ReactDOM.render()方法。
+     * React将{name: 'Sara'}作为props传入并调用Welcome组件。
+     * Welcome组件将<h1>Hello, Sara</h1>元素作为结果返回。
+     * React DOM将DOM更新为<h1>Hello, Sara</h1>。
+     */
+    //组合组件
+    class App extends React.Component{
+        render(){
+            console.log(this);
+            return<div>
+                <Welcome name={this.props.n}/>
+                <HelloWorld name={this.props.w}/>
+                </div>
+        }
+    }
+    App.defaultProps={
+        n:"defaultProps默认属性"
+    };
+    App.propTypes={
+      n:PropTypes.string.isRequired
+    };
+
+    ReactDOM.render(<App w="propTypes属性限制"/>,document.getElementById("app"));
+    /**
+     * 组件切分为更小的组件
+     * function Comment(props) {
+     *   return (
+     *       <div className="Comment">
+     *           <div className="UserInfo">
+     *               <img className="Avatar"
+     *                    src={props.author.avatarUrl}
+     *                    alt={props.author.name}
+     *               />
+     *               <div className="UserInfo-name">
+     *                   {props.author.name}
+     *               </div>
+     *           </div>
+     *           <div className="Comment-text">
+     *               {props.text}
+     *           </div>
+     *           <div className="Comment-date">
+     *               {formatDate(props.date)}
+     *           </div>
+     *       </div>
+     *   );
+     * }
+     */
+    function formatDate(date) {
+        return date.toLocaleDateString();
+    }
+
+    function Avatar(props) {
+        return (
+            <img className="Avatar"
+                 src={props.user.avatarUrl}
+                 alt={props.user.name} />
+        );
+    }
+    function UserInfo(props) {
+        return (
+            <div className="UserInfo">
+                <Avatar user={props.user} />
+                <div className="UserInfo-name">{props.user.name}</div>
+            </div>
+        );
+    }
+    class Comment extends React.Component{
+        render(){
+            return <div className="comment">
+                <UserInfo user={this.props.author}/>
+                <div className="Comment-text">{this.props.text}</div>
+                <div className="Comment-date">{formatDate(this.props.date)}</div>
+            </div>
+        }
+    }
+    ReactDOM.render(<Comment date={new Date} author={{name:"张",avatarUrl:"tom-one.jpeg"}} text="最难的是入不了门"/>,document.getElementById("comment"));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>diff-key</title>
+</head>
+<body>
+<div id="key"></div>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script type="text/babel">
+    class Person extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                person: [{idCard: 1, name: "张三", age: 18}, {idCard: 2, name: "李四", age: 20}]
+            };
+            this.addData = this.addData.bind(this);
+        }
+
+        addData() {
+            var add = {idCard: 3, name: "王五", age: 22};
+            if(this.state.person.length>2){
+                this.state.person[0].name='张三改';
+            }
+            this.state.person.push(add);
+            this.setState({
+                person: this.state.person
+            });
+        }
+
+        render() {
+            return (
+                <div>
+                    <ul>
+                        {this.state.person.map(function (item) {
+                            return <li key={item.idCard}>{item.idCard},{item.name},{item.age}</li>;
+                        })}
+                    </ul>
+                    <ul>
+                        {this.state.person.map((item, index) => {
+                            return <li key={index}>{item.idCard},{item.name},{item.age}</li>;
+                        })}
+                    </ul>
+                    <button onClick={this.addData}>添加</button>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Person/>, document.getElementById("key"));
+</script>
+</body>
+</html>

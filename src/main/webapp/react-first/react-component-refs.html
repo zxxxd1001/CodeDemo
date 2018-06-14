@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component组件refs</title>
+    <style>
+        #cl{
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="date"></div>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script type="text/babel">
+    /**
+     * react通过 refs 属性在虚拟dom中找到 页面真实的dom属性
+     */
+    class Date extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                flag: false
+            };
+            this.clickFlag = this.clickFlag.bind(this);
+        }
+
+        clickFlag(e) {
+            this.setState({
+                flag: !this.state.flag
+            });
+            console.log(e.target.innerHTML);
+            console.log("input value : "+this.refs.input.value);
+        }
+
+        render() {
+            let {flag}=this.state;
+            return (
+                <div>
+                    <input ref="input"/>
+                    <h1 onClick={this.clickFlag} id="cl" className="cll">{flag ? "NO" : "OFF"}</h1>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Date/>, document.getElementById("date"));
+    //2.3 深层套欠对象赋值,note: 此时，name 变量并没有声明
+
+    var person = {name: {firstName: 'John', lastName: 'Doe'}};
+    var {name: {firstName, lastName}} = person;
+    console.log(firstName,lastName);
+</script>
+</body>
+</html>

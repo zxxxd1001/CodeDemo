@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component组件事件</title>
+</head>
+<body>
+<a href="#" onclick="console.log('The link was clicked.'); return false">
+    Click me
+</a>
+<div id="action"></div>
+<div id="button"></div>
+<script src="../javascripts/react/react.js"></script>
+<script src="../javascripts/react/react-dom.js"></script>
+<script src="../javascripts/react/babel.min.js"></script>
+<script type="text/babel">
+    /**
+     * 在 React 中你不能通过返回 false,来阻止默认行为.
+     * 必须明确调用 preventDefault
+     *
+     *
+     * 当使用 React 时，你一般不需要调用 addEventListener 在 DOM 元素被创建后添加事件监听器。
+     * 相反，只要当元素被初始渲染的时候提供一个监听器就可以了。
+     */
+    function ActionLink() {
+        function handleClick(e) {
+            /**
+             * 这里， e 是一个合成的事件。 React 根据 W3C 规范 定义了这个合成事件，所以你不需要担心跨浏览器的兼容性问题。
+             */
+            e.preventDefault();
+            console.log(e);
+            console.log('The link was clicked.');
+        }
+
+        return <a href="http://baidu.com" onClick={handleClick}>Click me</a>;
+    }
+    ReactDOM.render(<ActionLink/>,document.getElementById("action"));
+
+    class Target extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {isToggleOn: true};
+            // 这个绑定是必要的，使`this`在回调中起作用  强制绑定this
+            /**
+             * 在 JavaScript 中，类方法默认没有 绑定 的。
+             * 如果你忘记绑定 this.handleClick 并将其传递给onClick,
+             * 那么在直接调用该函数时，this 会是 undefined 。
+             */
+            //这不是 React 特有的行为；这是 JavaScript 中的函数如何工作的一部分
+            this.buttonClick=this.buttonClick.bind(this);
+        }
+        buttonClick(e){
+            console.log(this);
+            // this.setState({isToggleOn:this.state.isToggleOn});
+            this.setState(e=>{
+                e.isToggleOn=!e.isToggleOn;
+            });
+            console.log(this.refs.input.value);
+        }
+        handleBlur(event){
+            console.log(event);
+            console.log(event.target);
+            console.log(event.target.value);
+        }
+
+        render(){
+            return (
+                <div>
+                    <input ref="input" type="text"/>
+                    <button onClick={this.buttonClick}>确定</button>
+                    <span>{this.state.isToggleOn ? 'ON' : 'OFF'}</span>
+                    <br/>
+                    <input onBlur={this.handleBlur} type="text" placeholder="失去焦点提示数据" />
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Target/>,document.getElementById("button"));
+</script>
+</body>
+</html>
